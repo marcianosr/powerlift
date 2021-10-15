@@ -1,0 +1,96 @@
+{
+	"week": "37",
+	"gym": {
+		"name": "Sportcentrum TopFit",
+		"members": [
+			{
+				"name": "Marciano",
+				"lifts": {
+					"squat": {
+						"weight": "195",
+						"sets": "1",
+						"reps": "3"
+					},
+					"benchpress": {
+						"weight": "140",
+						"sets": "1",
+						"reps": "1"
+					},
+					"deadlift": {
+						"weight": "227,5",
+						"sets": "10",
+						"reps": "1"
+					},
+					"total": "200"
+				},
+				"weightClass": "93"
+			},
+			{
+				"name": "Thomas",
+				"lifts": {
+					"squat": {
+						"weight": "185",
+						"sets": "3",
+						"reps": "3"
+					},
+					"benchpress": {
+						"weight": "140",
+						"sets": "1",
+						"reps": "1"
+					},
+					"deadlift": {
+						"weight": "150",
+						"sets": "1",
+						"reps": "3"
+					},
+					"total": "200"
+				},
+				"weightClass": "105"
+			},
+			{
+				"name": "Rik",
+				"lifts": {
+					"squat": {
+						"weight": "130",
+						"sets": "3",
+						"reps": "2"
+					},
+					"benchpress": {
+						"weight": "77,5",
+						"sets": "3",
+						"reps": "2"
+					},
+					"deadlift": {
+						"weight": "150",
+						"sets": "2",
+						"reps": "1"
+					},
+					"total": "200"
+				},
+				"weightClass": "83"
+			},
+			{
+				"name": "Sara",
+				"lifts": {
+					"squat": {
+						"weight": "102,5",
+						"sets": "1",
+						"reps": "1"
+					},
+					"benchpress": {
+						"weight": "55",
+						"sets": "1",
+						"reps": "1"
+					},
+					"deadlift": {
+						"weight": "145",
+						"sets": "1",
+						"reps": "1"
+					},
+					"total": "200"
+				},
+				"weightClass": "63"
+			}
+		]
+	}
+}

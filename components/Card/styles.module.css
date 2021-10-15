@@ -1,0 +1,136 @@
+.card {
+	border-radius: 10px;
+
+	display: grid;
+	grid-template-rows: 1fr;
+	background-color: white;
+	padding: 0.4rem;
+	border-radius: 10px;
+}
+
+.noResult {
+	border: 3px dashed #cac9cc;
+	color: gray;
+	font-weight: 600;
+	background-color: transparent;
+}
+
+.card p {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.userContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* padding: 0 0 0 1rem; */
+	/* background-color: #ffd4d4; */
+	border-radius: 10px;
+}
+
+.cardInnerContainer {
+	/* background: #ffebeb;
+	color: #d27b7b; */
+
+	/* background: linear-gradient(
+		225deg,
+		rgba(255, 255, 255, 0),
+		rgba(255, 255, 255, 0.6),
+		white
+	); */
+	/* box-shadow: #e3e3e2 4px 2px 6px 2px; */
+
+	/* background-color: white; */
+	/* border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px; */
+	/* border-radius: 10px; */
+	/* padding: 0.4rem; */
+	/* display: flex;
+	justify-content: center;
+	flex: 1 1 auto;
+	gap: 0.5rem; */
+	/* max-width: 200px; */
+
+	gap: 0.5rem;
+}
+
+.cardInnerContainer span {
+	font-weight: 700;
+}
+
+.infoContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.pb {
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.platesContainer {
+	/* gap: 0.2rem; */
+	display: flex;
+	align-items: center;
+	gap: 1px;
+}
+
+.red {
+	background-color: red;
+	height: 100%;
+	width: 5px;
+}
+
+.yellow {
+	background-color: rgb(255, 231, 15);
+	height: 85%;
+	width: 5px;
+}
+
+.silver {
+	background-color: rgb(204, 204, 204);
+	height: 35%;
+	width: 3px;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.15rem;
+	/* background-color: #ececec; */
+	padding: 0.5rem;
+	border-radius: 5px;
+}
+
+.info:first-child span:first-child {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.info:last-child {
+	/* background-color: #ececec;
+	padding: 0.5rem;
+	border-radius: 5px; */
+	gap: 1.5rem;
+}
+
+.info span:nth-child(odd) {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.details span:last-child {
+	margin-top: -0.25rem;
+	color: #000000ad;
+	font-size: 0.75rem;
+}
