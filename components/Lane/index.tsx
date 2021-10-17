@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../../types";
-import Card from "../Card";
+import Card, { SmallCard } from "../Card";
 import styles from "./styles.module.css";
 
 type LaneProps = {
@@ -9,19 +9,22 @@ type LaneProps = {
 };
 
 const Lane: React.VFC<LaneProps> = ({ title, users }) => {
-	const excersise = title.split(" ").join("").toLowerCase();
+	const laneTitle = title.split(" ").join("").toLowerCase();
 
 	return (
 		<section className={styles.lane}>
-			<h1>{excersise}</h1>
+			<h1>{laneTitle}</h1>
 
 			{users.map((user) => {
+				if (laneTitle === "total")
+					return <SmallCard key={user._id} user={user} />;
+
 				return (
-					user.lifts[excersise] && (
+					user.lifts[laneTitle] && (
 						<Card
 							key={user._id}
 							user={user}
-							excersise={excersise}
+							laneTitle={laneTitle}
 						/>
 					)
 				);

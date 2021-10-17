@@ -5,15 +5,48 @@ import styles from "./styles.module.css";
 
 type CardProps = {
 	user: User;
-	excersise: string;
+	laneTitle: string;
 };
 
-const Card: FC<CardProps> = ({ user, excersise }) => {
+type SmallCardProps = {
+	user: User;
+};
+
+export const SmallCard: FC<SmallCardProps> = ({ user }) => {
+	const total =
+		Number(user?.lifts?.squat?.weight) +
+		Number(user?.lifts?.benchpress?.weight) +
+		Number(user?.lifts?.deadlift?.weight);
+
+	return (
+		<section className={styles.card}>
+			<div className={styles.cardInnerContainer}>
+				<section className={styles.userContainer}>
+					<span>{user.displayName}</span>
+					<div className={styles.userInnerContainer}>
+						<span>{user.weightClass}.0kg</span>
+						<span> - {user.club}</span>
+					</div>
+				</section>
+
+				<section className={styles.infoContainer}>
+					<div className={styles.info}>
+						<div className={styles.weight}>
+							<span>{total}</span>
+							<span>kg</span>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+	);
+};
+const Card: FC<CardProps> = ({ user, laneTitle }) => {
 	console.log("user", user);
 	return (
 		<section
 			className={classNames(styles.card, {
-				[styles.noResult]: !user.lifts[excersise],
+				[styles.noResult]: !user.lifts[laneTitle],
 			})}
 		>
 			<div className={styles.cardInnerContainer}>
@@ -28,7 +61,7 @@ const Card: FC<CardProps> = ({ user, excersise }) => {
 				<section className={styles.infoContainer}>
 					<div className={styles.info}>
 						<div className={styles.weight}>
-							<span>{user.lifts[excersise]?.weight}</span>
+							<span>{user.lifts[laneTitle]?.weight}</span>
 							<span>kg</span>
 						</div>
 					</div>
@@ -36,14 +69,14 @@ const Card: FC<CardProps> = ({ user, excersise }) => {
 					<div className={styles.info}>
 						<div className={styles.details}>
 							<span className={styles.title}>
-								{user.lifts[excersise]?.sets}
+								{user.lifts[laneTitle]?.sets}
 							</span>
 							<span className={styles.kg}>set</span>
 						</div>
 
 						<div className={styles.details}>
 							<span className={styles.title}>
-								{user.lifts[excersise]?.reps}
+								{user.lifts[laneTitle]?.reps}
 							</span>
 							<span className={styles.kg}>reps</span>
 						</div>

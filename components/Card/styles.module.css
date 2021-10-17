@@ -37,6 +37,7 @@
 	justify-content: center;
 	border-bottom: 1px dashed #5c5258;
 	padding-bottom: 0.4rem;
+	line-height: 1;
 }
 
 .userContainer span {
@@ -45,7 +46,6 @@
 }
 
 .userInnerContainer {
-	margin-top: -5px;
 	color: #5c5258;
 }
 
@@ -65,8 +65,7 @@
 	justify-content: space-between;
 	gap: 0.15rem;
 	/* background-color: #ececec; */
-	padding: 0.5rem;
-	padding-bottom: 0.25rem;
+	padding: 0.25rem 0.5rem;
 }
 
 .info:first-child span:first-child {
