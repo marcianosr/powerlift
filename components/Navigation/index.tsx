@@ -5,8 +5,6 @@ import React from "react";
 const Navigation: React.VFC = () => {
 	const [session] = useSession();
 
-	console.log("session", session);
-
 	const onLogout = async () => signOut();
 
 	return (

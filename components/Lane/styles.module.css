@@ -8,6 +8,6 @@
 
 .lane {
 	display: grid;
-	grid-template-rows: 30px repeat(auto-fit, minmax(50px, 90px));
+	grid-template-rows: 30px repeat(auto-fit, minmax(50px, max-content));
 	gap: 0.5rem;
 }

@@ -28,8 +28,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const liftsCollections = await client.db().collection("lifts");
 	const today = format(new Date(), "dd/MM/yyyy");
 
-	// console.log(liftsCollections);
-
 	// Get the last updated lifts.
 	const lifts = await liftsCollections
 		.find({
@@ -37,11 +35,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.toArray();
 
-	// console.log("lifts", lifts);
-
 	client.close();
 
-	return res.status(201).json({ message: `test`, data: lifts });
+	return res
+		.status(201)
+		.json({ message: `Succesfully fetched lifts`, data: lifts });
 };
 
 export default handler;

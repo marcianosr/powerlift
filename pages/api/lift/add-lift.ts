@@ -16,6 +16,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const email = session.user?.email;
 	const displayName = session.user?.displayName;
+	const weightClass = session.user?.weightClass;
+	const club = session.user?.club;
 
 	const client = await connect();
 	const usersCollection = await client.db().collection("users");
@@ -73,6 +75,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const result = await liftsCollections.insertOne({
 		email,
 		displayName,
+		weightClass,
+		club,
 		lifts: {
 			squat: lifts.squat,
 			benchpress: lifts.benchpress,

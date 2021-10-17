@@ -17,7 +17,13 @@ const Lane: React.VFC<LaneProps> = ({ title, users }) => {
 
 			{users.map((user) => {
 				return (
-					<Card key={user._id} user={user} excersise={excersise} />
+					user.lifts[excersise] && (
+						<Card
+							key={user._id}
+							user={user}
+							excersise={excersise}
+						/>
+					)
 				);
 			})}
 		</section>

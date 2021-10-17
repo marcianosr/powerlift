@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 	// page will only render if we are authenticated
 	const session = await getSession({ req: req }); // look into the req, gets the session cookie en checks if it is valid
 
-	console.log(session, "/week/37");
+	// console.log(session, "/week/37");
 
 	if (!session) {
 		return {

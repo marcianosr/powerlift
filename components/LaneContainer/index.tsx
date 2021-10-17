@@ -8,9 +8,8 @@ type LaneContainerProps = {
 	users: User[]; // Refactor with user model from next auth
 };
 
-console.log(styles);
-
 const LaneContainer: FC<LaneContainerProps> = ({ users }) => {
+	console.log("users", users);
 	return (
 		<section className={styles.laneContainer}>
 			{/* <div className={laneStyles.lane}>

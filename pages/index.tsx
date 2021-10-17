@@ -5,14 +5,16 @@ import LiftsForm from "../components/LiftsForm";
 import LaneContainer from "../components/LaneContainer";
 import DateLine from "../components/DateLine";
 import fetch from "node-fetch";
-import { UserLiftsResponse } from "../types";
+import { UserResponse } from "../types";
 
 export type LiftsProps = {
-	users: UserLiftsResponse;
+	users: UserResponse[];
 };
 
 const Home: NextPage<LiftsProps> = ({ users }) => {
 	const [session, loading] = useSession();
+
+	console.log("users", users);
 
 	return (
 		<>
@@ -46,7 +48,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 		},
 	});
 
-	const userLifts = (await response.json()) as LiftsResponse;
+	const userLifts = (await response.json()) as UserResponse;
+
+	console.log("userLifts", userLifts);
 
 	return {
 		props: { users: userLifts.data },

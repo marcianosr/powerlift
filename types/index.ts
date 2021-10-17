@@ -57,6 +57,9 @@ export type User = {
 	_id: string;
 	email: string;
 	displayName: string;
+	weightClass: string;
+	club: string;
+	gender: string;
 	lifts: Lifts;
 	date: any;
 };

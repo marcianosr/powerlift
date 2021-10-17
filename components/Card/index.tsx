@@ -9,44 +9,47 @@ type CardProps = {
 };
 
 const Card: FC<CardProps> = ({ user, excersise }) => {
+	console.log("user", user);
 	return (
 		<section
 			className={classNames(styles.card, {
 				[styles.noResult]: !user.lifts[excersise],
 			})}
 		>
-			{user.lifts[excersise] ? (
-				<div className={styles.cardInnerContainer}>
+			<div className={styles.cardInnerContainer}>
+				<section className={styles.userContainer}>
 					<span>{user.displayName}</span>
+					<div className={styles.userInnerContainer}>
+						<span>{user.weightClass}.0kg</span>
+						<span> - {user.club}</span>
+					</div>
+				</section>
 
-					<section className={styles.infoContainer}>
-						<div className={styles.info}>
-							<div className={styles.weight}>
-								<span>{user.lifts[excersise]?.weight}</span>
-								<span>kg</span>
-							</div>
+				<section className={styles.infoContainer}>
+					<div className={styles.info}>
+						<div className={styles.weight}>
+							<span>{user.lifts[excersise]?.weight}</span>
+							<span>kg</span>
+						</div>
+					</div>
+
+					<div className={styles.info}>
+						<div className={styles.details}>
+							<span className={styles.title}>
+								{user.lifts[excersise]?.sets}
+							</span>
+							<span className={styles.kg}>set</span>
 						</div>
 
-						<div className={styles.info}>
-							<div className={styles.details}>
-								<span className={styles.title}>
-									{user.lifts[excersise]?.sets}
-								</span>
-								<span className={styles.kg}>set</span>
-							</div>
-
-							<div className={styles.details}>
-								<span className={styles.title}>
-									{user.lifts[excersise]?.reps}
-								</span>
-								<span className={styles.kg}>reps</span>
-							</div>
+						<div className={styles.details}>
+							<span className={styles.title}>
+								{user.lifts[excersise]?.reps}
+							</span>
+							<span className={styles.kg}>reps</span>
 						</div>
-					</section>
-				</div>
-			) : (
-				<p>No lift today</p>
-			)}
+					</div>
+				</section>
+			</div>
 		</section>
 	);
 	// return (
