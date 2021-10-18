@@ -14,7 +14,7 @@ const LaneContainer: FC<LaneContainerProps> = ({ users }) => {
 			<Lane title="Squat" users={users} />
 			<Lane title="Bench press" users={users} />
 			<Lane title="Deadlift" users={users} />
-			<Lane title="Total" users={users} />
+			<Lane title="Totaal" users={users} />
 		</section>
 	);
 };

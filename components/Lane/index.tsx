@@ -16,7 +16,7 @@ const Lane: React.VFC<LaneProps> = ({ title, users }) => {
 			<h1>{laneTitle}</h1>
 
 			{users.map((user) => {
-				if (laneTitle === "total")
+				if (laneTitle === "totaal")
 					return <SmallCard key={user._id} user={user} />;
 
 				return (

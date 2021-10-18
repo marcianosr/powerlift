@@ -12,6 +12,7 @@
 		rgba(255, 255, 255, 0.3)
 	);
 	padding: 0.6rem;
+	padding-bottom: 0.3rem;
 	border-radius: 10px;
 	box-shadow: 0px 28px 20px -31px #9b9b9b;
 }
@@ -56,7 +57,14 @@
 
 .infoContainer {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
+	gap: 0.75rem;
+}
+
+.card time {
+	font-size: 0.7rem;
+	font-weight: 600;
+	color: #5c5258;
 }
 
 .info {
@@ -65,11 +73,12 @@
 	justify-content: space-between;
 	gap: 0.15rem;
 	/* background-color: #ececec; */
-	padding: 0.25rem 0.5rem;
+	padding: 0.25rem 0;
+	padding-bottom: 0;
 }
 
 .info:first-child span:first-child {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 }
 
@@ -77,12 +86,16 @@
 	/* background-color: #ececec;
 	padding: 0.5rem;
 	border-radius: 5px; */
-	gap: 1.5rem;
+	gap: 0.75rem;
 }
 
 .info span:nth-child(odd) {
-	font-size: 1.25rem;
+	font-size: 1rem;
 	font-weight: 700;
+}
+
+.type {
+	font-size: 1rem;
 }
 
 .pb {
@@ -122,7 +135,7 @@
 }
 
 .details span:last-child {
-	margin-top: -0.25rem;
+	margin-top: -0.5rem;
 	color: #000000ad;
 	font-size: 0.75rem;
 }

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { formatDistance } from "date-fns";
 import React, { FC } from "react";
 import { User } from "../../types";
 import styles from "./styles.module.css";
@@ -14,9 +15,9 @@ type SmallCardProps = {
 
 export const SmallCard: FC<SmallCardProps> = ({ user }) => {
 	const total =
-		Number(user?.lifts?.squat?.weight) +
-		Number(user?.lifts?.benchpress?.weight) +
-		Number(user?.lifts?.deadlift?.weight);
+		Number(user?.lifts?.squat?.weight || 0) +
+		Number(user?.lifts?.benchpress?.weight || 0) +
+		Number(user?.lifts?.deadlift?.weight || 0);
 
 	return (
 		<section className={styles.card}>
@@ -42,7 +43,6 @@ export const SmallCard: FC<SmallCardProps> = ({ user }) => {
 	);
 };
 const Card: FC<CardProps> = ({ user, laneTitle }) => {
-	console.log("user", user);
 	return (
 		<section
 			className={classNames(styles.card, {
@@ -59,6 +59,9 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 				</section>
 
 				<section className={styles.infoContainer}>
+					<div>
+						<span className={styles.type}>paused</span>
+					</div>
 					<div className={styles.info}>
 						<div className={styles.weight}>
 							<span>{user.lifts[laneTitle]?.weight}</span>
@@ -82,6 +85,7 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 						</div>
 					</div>
 				</section>
+				<time>{formatDistance(new Date(845), Date.now())}</time>
 			</div>
 		</section>
 	);

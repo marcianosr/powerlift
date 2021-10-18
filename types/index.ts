@@ -61,5 +61,8 @@ export type User = {
 	club: string;
 	gender: string;
 	lifts: Lifts;
-	date: any;
+	date: string;
+	dateTime: string;
 };
+
+export type Excersise = "squat" | "benchpress" | "deadlift";

@@ -35,11 +35,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		})
 		.toArray();
 
+	const sortedLifts = [...lifts];
+
+	sortedLifts.sort((a, b) => {
+		const dateA = new Date(a.dateTime);
+		const dateB = new Date(b.dateTime);
+		return dateA > dateB ? 1 : -1;
+	});
+
 	client.close();
 
 	return res
 		.status(201)
-		.json({ message: `Succesfully fetched lifts`, data: lifts });
+		.json({ message: `Succesfully fetched lifts`, data: sortedLifts });
 };
 
 export default handler;

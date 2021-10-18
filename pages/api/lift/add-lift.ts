@@ -33,6 +33,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const data = req.body;
 	const { lifts } = data;
 	const today = format(new Date(), "dd/MM/yyyy");
+	const dateTime = format(new Date(), "HH:mm:ss");
+	const milliseconds = new Date();
 
 	const excersiseKeys = Object.keys(lifts);
 	const requiredFields = ["weight", "sets", "reps"];
@@ -83,6 +85,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			deadlift: lifts.deadlift,
 		},
 		date: today,
+		dateTime,
+		milliseconds,
 	});
 
 	client.close();

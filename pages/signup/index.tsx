@@ -182,26 +182,26 @@ const Signup: NextPage = () => {
 				)}
 
 				{selectedGender === "male" && (
-					<select name="club" id="club" ref={clubRef}>
-						<option value="">-- Select your club --</option>
-						<option value="SportcentrumTopFit">
-							Sportcentrum TopfFit
-						</option>
+					<select name="weightClass" id="weightClass" ref={weightRef}>
+						<option value="">--Select your weight class--</option>
+						<option value="59">59kg</option>
+						<option value="66">66kg</option>
+						<option value="74">74kg</option>
+						<option value="83">83kg</option>
+						<option value="93">93kg</option>
+						<option value="105">105kg</option>
+						<option value="120">120kg</option>
+						<option value="120+">120+kg</option>
 					</select>
 				)}
 
-				<select name="weightClass" id="weightClass" ref={weightRef}>
-					<option value="">--Select your weight class--</option>
-					<option value="59">59kg</option>
-					<option value="66">66kg</option>
-					<option value="74">74kg</option>
-					<option value="83">83kg</option>
-					<option value="93">93kg</option>
-					<option value="105">105kg</option>
-					<option value="120">120kg</option>
-					<option value="120+">120+kg</option>
+				<select name="club" id="club" ref={clubRef}>
+					<option value="">-- Select your club --</option>
+					<option value="Sportcentrum TopFit">
+						Sportcentrum TopFit
+					</option>
+					<option value="TSKV Spartacus">TSKV Spartacus</option>
 				</select>
-
 				<label>Password</label>
 				<input
 					type="password"

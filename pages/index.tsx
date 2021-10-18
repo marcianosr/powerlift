@@ -14,8 +14,6 @@ export type LiftsProps = {
 const Home: NextPage<LiftsProps> = ({ users }) => {
 	const [session, loading] = useSession();
 
-	console.log("users", users);
-
 	return (
 		<>
 			<main style={{ maxWidth: "1200px" }}>
