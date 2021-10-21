@@ -1,6 +1,7 @@
+import React from "react";
 import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
-import React from "react";
+import styles from "./styles.module.css";
 
 const Navigation: React.VFC = () => {
 	const [session] = useSession();
@@ -8,7 +9,7 @@ const Navigation: React.VFC = () => {
 	const onLogout = async () => signOut();
 
 	return (
-		<nav>
+		<nav className={styles.navigation}>
 			{session?.user ? (
 				<>
 					<Link href={`/profile/prfile`}>Profiel</Link>

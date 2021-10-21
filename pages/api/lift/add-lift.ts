@@ -42,6 +42,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (excersiseKeys.length === 0)
 		return res.status(422).json({ message: "Form fields empty" });
 
+	console.log("loift", lifts);
+
 	const fields = Object.values(lifts)
 		.map((lift) =>
 			requiredFields.map((field) => Object.keys(lift).includes(field))
@@ -51,7 +53,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const isNotValid = fields.includes(false);
 
 	if (isNotValid)
-		return res.status(422).json({ message: "Form fields empty" });
+		return res.status(422).json({
+			message: `Fields for ${excersiseKeys.map(
+				(e) => e
+			)} not filled in completely`,
+			fields: excersiseKeys.length > 0 ? excersiseKeys.map((e) => e) : [],
+		});
 
 	const recordFound = await liftsCollections.findOne({ email, date: today });
 

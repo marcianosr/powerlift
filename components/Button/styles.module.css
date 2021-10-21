@@ -1,0 +1,26 @@
+.button {
+	padding: 0.4rem 1rem;
+	border-radius: var(--cardRadius);
+	border-radius: 5px;
+	font-size: 1rem;
+	font-weight: 700;
+	display: flex;
+	/* margin: auto; */
+	background-color: transparent;
+}
+
+.primary {
+	border: 1px solid #fe2c55;
+	color: #fe2c55;
+	justify-content: center;
+	transition: 0.3s ease;
+
+	/* color: white; */
+	/* background-color: #ace1af;
+	background-color: #f4c430; */
+	/* color: white; */
+}
+
+.primary:hover {
+	background-color: #fe2c5515;
+}

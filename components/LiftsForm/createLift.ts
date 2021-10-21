@@ -12,7 +12,10 @@ export const createLift = async (lifts: Lifts) => {
 	const data = await response.json();
 
 	if (!response.ok) {
-		throw new Error(data.message || "Something went wrong!");
+		throw new Error(
+			JSON.stringify({ message: data.message, fields: data.fields }) ||
+				"Something went wrong!"
+		);
 	}
 
 	return data;

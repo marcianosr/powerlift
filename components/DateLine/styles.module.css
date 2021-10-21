@@ -1,3 +1,6 @@
 .dateLine {
 	text-align: center;
+	display: flex;
+	align-items: center;
+	margin: 0;
 }

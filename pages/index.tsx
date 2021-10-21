@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import type { GetServerSideProps, NextPage } from "next";
 import { getSession, useSession } from "next-auth/client";
 import LiftsForm from "../components/LiftsForm";
 import LaneContainer from "../components/LaneContainer";
-import DateLine from "../components/DateLine";
 import fetch from "node-fetch";
 import { UserResponse } from "../types";
+import LaneHeader from "../components/LaneHeader";
 
 export type LiftsProps = {
 	users: UserResponse[];
@@ -13,14 +13,16 @@ export type LiftsProps = {
 
 const Home: NextPage<LiftsProps> = ({ users }) => {
 	const [session, loading] = useSession();
+	const [showModal, setShowModal] = useState(false);
 
 	return (
 		<>
-			<main style={{ maxWidth: "1200px" }}>
-				<h1>Powerlift gymboard</h1>
-				<DateLine />
+			<main style={{ maxWidth: "1200px", marginTop: "5rem" }}>
+				<LaneHeader setShowModal={setShowModal} />
 				<LaneContainer users={users} />
-				<LiftsForm />
+				{showModal && (
+					<LiftsForm hideModal={() => setShowModal(false)} />
+				)}
 			</main>
 		</>
 	);

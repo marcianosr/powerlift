@@ -1,9 +1,26 @@
 import React, { useEffect, useState } from "react";
+import classNames from "classnames";
+import Button from "../Button";
+import Modal from "../Modal";
 import { createLift } from "./createLift";
 import FormGroup from "./FormGroup";
 
-const LiftsForm: React.VFC = () => {
+import styles from "./styles.module.css";
+
+type LiftsFormProps = {
+	hideModal: () => void;
+};
+
+const LiftsForm: React.VFC<LiftsFormProps> = ({ hideModal }) => {
 	const [lifts, setLifts] = useState<any>({});
+	const [errorMessage, setErrorMessage] = useState({
+		message: "",
+		empty: false,
+		fields: [],
+	});
+
+	console.log("errormessage", errorMessage);
+
 	const [hasAlreadySubmittedToday, setHasAlreadySubmittedToday] =
 		useState(false);
 
@@ -42,33 +59,68 @@ const LiftsForm: React.VFC = () => {
 
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		createLift(lifts);
-		clearForm();
+
+		createLift(lifts)
+			.then((value) => {
+				console.log("Value", value);
+				hideModal();
+
+				clearForm();
+			})
+			.catch((error) => {
+				const invalidFields = JSON.parse(error.message)?.fields;
+				// console.log("e", JSON.parse(error.message).fields);
+
+				if (invalidFields) {
+					return setErrorMessage({
+						...errorMessage,
+						fields: invalidFields,
+					});
+				}
+
+				return setErrorMessage({ ...errorMessage, empty: true });
+			});
 	};
 
 	const clearForm = () => setLifts({});
 
 	return (
-		<section>
-			<form onSubmit={onSubmit}>
+		<Modal onClickBackdrop={hideModal}>
+			<h2 className={styles.formHeaderTitle}>
+				Lifts van vandaag toevoegen
+			</h2>
+			<span
+				className={classNames(styles.description, {
+					[styles.error]: errorMessage.empty,
+				})}
+			>
+				Vul tenminste 1 lift in om hem op het scoreboard te plaatsen.
+			</span>
+			<form className={styles.form} onSubmit={onSubmit}>
 				<FormGroup
 					name="Squat"
 					onChange={onChange}
 					values={{ ...lifts.squat }}
+					hasError={errorMessage.fields.includes("squat")}
 				/>
+
 				<FormGroup
 					name="Bench press"
 					onChange={onChange}
 					values={{ ...lifts.benchpress }}
+					hasError={errorMessage.fields.includes("benchpress")}
 				/>
 				<FormGroup
 					name="Deadlift"
 					onChange={onChange}
 					values={{ ...lifts.deadlift }}
+					hasError={errorMessage.fields.includes("deadlift")}
 				/>
-				<button type="submit">Delen</button>
+				<Button type="submit" variant="primary">
+					Plaatsen
+				</Button>
 			</form>
-		</section>
+		</Modal>
 	);
 };
 
