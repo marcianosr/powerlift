@@ -17,6 +17,8 @@
 	background-color: white;
 	padding: 2rem;
 	border-radius: var(--cardRadius);
+	min-height: 500px;
+	min-height: 200px;
 }
 
 .close {

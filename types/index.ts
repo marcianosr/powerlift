@@ -33,19 +33,19 @@ export type GymData = {
 
 export type Lifts = {
 	squat: {
-		weight: string | null;
-		reps: string | null;
-		sets: string | null;
+		weight: string | undefined;
+		reps: string | undefined;
+		sets: string | undefined;
 	};
 	benchpress: {
-		weight: string | null;
-		reps: string | null;
-		sets: string | null;
+		weight: string | undefined;
+		reps: string | undefined;
+		sets: string | undefined;
 	};
 	deadlift: {
-		weight: string | null;
-		reps: string | null;
-		sets: string | null;
+		weight: string | undefined;
+		reps: string | undefined;
+		sets: string | undefined;
 	};
 };
 

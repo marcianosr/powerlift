@@ -39,25 +39,50 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const excersiseKeys = Object.keys(lifts);
 	const requiredFields = ["weight", "sets", "reps"];
 
-	if (excersiseKeys.length === 0)
-		return res.status(422).json({ message: "Form fields empty" });
+	//////////////////////////////////
+	// Simplify these two monstrosities later
+	const mappedInputFieldsToBoolean = excersiseKeys.map((excersise) =>
+		requiredFields.map((field) => {
+			if (lifts[excersise][field] !== null) {
+				return true;
+			}
 
-	console.log("loift", lifts);
+			return false;
+		})
+	);
+	//
+	//
+	const validatedInputFields = mappedInputFieldsToBoolean.map((fields) => {
+		const isEveryFieldValid = fields.every((f) => f);
+		const areSomeFieldsValid = fields.some((f) => f);
 
-	const fields = Object.values(lifts)
-		.map((lift) =>
-			requiredFields.map((field) => Object.keys(lift).includes(field))
-		)
-		.flat();
+		if (!isEveryFieldValid && areSomeFieldsValid) {
+			return false;
+		}
 
-	const isNotValid = fields.includes(false);
+		if (isEveryFieldValid) {
+			return true;
+		}
+	});
+	// The end
+	//////////////////////////////////
 
-	if (isNotValid)
+	const isInvalid = validatedInputFields.includes(false);
+
+	console.log("isInvalid", isInvalid);
+
+	if (isInvalid)
 		return res.status(422).json({
-			message: `Fields for ${excersiseKeys.map(
-				(e) => e
-			)} not filled in completely`,
-			fields: excersiseKeys.length > 0 ? excersiseKeys.map((e) => e) : [],
+			message: "Form fields empty",
+			fields: excersiseKeys
+				.map((excersise) => {
+					return requiredFields.map((field) => {
+						return lifts[excersise][field] === null
+							? `${excersise}:${field}`
+							: null;
+					});
+				})
+				.flat(),
 		});
 
 	const recordFound = await liftsCollections.findOne({ email, date: today });
@@ -87,9 +112,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		weightClass,
 		club,
 		lifts: {
-			squat: lifts.squat,
-			benchpress: lifts.benchpress,
-			deadlift: lifts.deadlift,
+			...lifts,
 		},
 		date: today,
 		dateTime,

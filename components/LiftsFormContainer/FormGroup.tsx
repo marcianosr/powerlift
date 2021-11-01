@@ -8,9 +8,9 @@ type FormGroupProps = {
 	name: string;
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 	values: {
-		weight?: number;
-		sets?: number;
-		reps?: number;
+		weight?: string;
+		sets?: string;
+		reps?: string;
 	};
 	hasError: boolean;
 };
@@ -21,6 +21,7 @@ const FormGroup: React.VFC<FormGroupProps> = ({
 	hasError,
 }) => {
 	const formName = name.toLowerCase().split(" ").join("");
+	console.log("");
 
 	return (
 		<fieldset

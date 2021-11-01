@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { GetServerSideProps, NextPage } from "next";
 import { getSession, useSession } from "next-auth/client";
-import LiftsForm from "../components/LiftsForm";
+import LiftsFormContainer from "../components/LiftsFormContainer";
 import LaneContainer from "../components/LaneContainer";
 import fetch from "node-fetch";
 import { UserResponse } from "../types";
@@ -20,9 +20,10 @@ const Home: NextPage<LiftsProps> = ({ users }) => {
 			<main style={{ maxWidth: "1200px", marginTop: "5rem" }}>
 				<LaneHeader setShowModal={setShowModal} />
 				<LaneContainer users={users} />
-				{showModal && (
-					<LiftsForm hideModal={() => setShowModal(false)} />
-				)}
+				<LiftsFormContainer
+					showModal={showModal}
+					setShowModal={setShowModal}
+				/>
 			</main>
 		</>
 	);

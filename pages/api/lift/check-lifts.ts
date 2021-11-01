@@ -34,13 +34,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		date: today,
 	});
 
-	console.log(hasResultAlready);
+	console.log("hasResultAlready", hasResultAlready);
 
 	if (hasResultAlready) {
 		client.close();
 
 		return res.status(201).json({
 			message: "Already submitted lifts today.",
+			lifts: hasResultAlready,
 			submitted: true,
 		});
 	}

@@ -5,19 +5,26 @@ import styles from "./styles.module.css";
 
 type ModalProps = {
 	onClickBackdrop: () => void;
+	withCloseButton: boolean;
 };
 
-const Modal: FC<ModalProps> = ({ onClickBackdrop, children }) => {
+const Modal: FC<ModalProps> = ({
+	onClickBackdrop,
+	withCloseButton = true,
+	children,
+}) => {
 	return (
 		<>
 			<div onClick={onClickBackdrop} className={styles.backdrop}></div>
 			<section className={styles.modalContainer}>
-				<FontAwesomeIcon
-					icon={faXmark}
-					size="1x"
-					className={styles.close}
-					onClick={onClickBackdrop}
-				/>
+				{withCloseButton && (
+					<FontAwesomeIcon
+						icon={faXmark}
+						size="1x"
+						className={styles.close}
+						onClick={onClickBackdrop}
+					/>
+				)}
 				{children}
 			</section>
 		</>
