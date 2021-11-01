@@ -3,6 +3,12 @@ import { getSession } from "next-auth/client";
 import { format } from "date-fns";
 import { connect } from "../../../lib/db";
 
+type ValidationRules = {
+	squat: { min: number; max: number };
+	benchpress: { min: number; max: number };
+	deadlift: { min: number; max: number };
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method !== "POST") return;
 
@@ -26,6 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (!user) {
 		res.status(404).json({ message: "User not found." });
 		client.close();
+		return;
 	}
 
 	const liftsCollections = await client.db().collection("lifts");
@@ -38,6 +45,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const excersiseKeys = Object.keys(lifts);
 	const requiredFields = ["weight", "sets", "reps"];
+
+	const VALIDATION_RULES: ValidationRules = {
+		squat: { min: 20, max: Math.ceil(+weightClass * 3.5) },
+		benchpress: { min: 20, max: Math.ceil(+weightClass * 2.5) },
+		deadlift: { min: 30, max: Math.ceil(+weightClass * 3.75) },
+	};
 
 	//////////////////////////////////
 	// Simplify these two monstrosities later
@@ -71,9 +84,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	console.log("isInvalid", isInvalid);
 
-	if (isInvalid)
+	if (isInvalid) {
+		client.close();
 		return res.status(422).json({
-			message: "Form fields empty",
+			message: "EMPTY",
 			fields: excersiseKeys
 				.map((excersise) => {
 					return requiredFields.map((field) => {
@@ -84,6 +98,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				})
 				.flat(),
 		});
+	}
+
+	const validateWeights = Object.entries(lifts).map(([key, value]) => {
+		if (
+			value.weight >= VALIDATION_RULES[key].max ||
+			(value.weight && value.weight <= VALIDATION_RULES[key].min)
+		) {
+			return false;
+		}
+	});
+
+	if (!isInvalid && validateWeights.includes(false)) {
+		return res.status(422).json({
+			message: "NEEDS_CONFIRMATION",
+			fields: Object.entries(lifts)
+				.map(([key, value]) => {
+					return value.weight >= VALIDATION_RULES[key].max ||
+						(value.weight &&
+							value.weight <= VALIDATION_RULES[key].min)
+						? key
+						: null;
+				})
+				.filter((f) => f !== null),
+		});
+	}
 
 	const recordFound = await liftsCollections.findOne({ email, date: today });
 
@@ -103,7 +142,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		);
 
-		return res.status(201).json({ message: `Lifts updated succesfully!` });
+		return res.status(201).json({ message: `UPDATE_SUCCES` });
 	}
 
 	const result = await liftsCollections.insertOne({
@@ -121,7 +160,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	client.close();
 
-	return res.status(201).json({ message: `Lifts added succesfully!` });
+	return res.status(201).json({ message: `ADD_SUCCES` });
 };
 
 export default handler;

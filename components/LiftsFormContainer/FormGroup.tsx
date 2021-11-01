@@ -21,8 +21,6 @@ const FormGroup: React.VFC<FormGroupProps> = ({
 	hasError,
 }) => {
 	const formName = name.toLowerCase().split(" ").join("");
-	console.log("");
-
 	return (
 		<fieldset
 			className={classNames(styles.fieldsetContainer, {

@@ -30,6 +30,14 @@
 	font-weight: 600;
 }
 
+.errorMessage {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: center;
+	color: red;
+	font-weight: 600;
+}
+
 .error {
 	color: red;
 }

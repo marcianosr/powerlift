@@ -16,12 +16,23 @@ type LiftsFormProps = {
 	clearForm: () => void;
 };
 
-type ErrorMessage = { message: string; empty: boolean; fields: string[] };
+type ErrorMessage = {
+	message: string;
+	status: string;
+	empty: boolean;
+	fields: string[];
+};
 
 const INITIAL_ERROR_STATE: ErrorMessage = {
 	message: "",
+	status: "",
 	empty: false,
 	fields: [],
+};
+
+const ERROR_MESSAGES = {
+	["NEEDS_CONFIRMATION"]: "Weet je zeker dat de gewichten kloppen?",
+	["EMPTY"]: "De invoervelden zijn leeg! Vul tenminste 1 lift volledig in.",
 };
 
 const LiftsForm: VFC<LiftsFormProps> = ({
@@ -46,10 +57,12 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 			})
 			.catch((error) => {
 				const invalidFields = JSON.parse(error.message)?.fields;
+				const messageType = JSON.parse(error.message)?.message;
 
 				if (invalidFields) {
 					return setErrorMessage({
 						...errorMessage,
+						message: ERROR_MESSAGES[messageType],
 						fields: invalidFields,
 					});
 				}
@@ -75,6 +88,15 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 			>
 				Vul tenminste 1 lift in om hem op het scoreboard te plaatsen.
 			</span>
+			{errorMessage.message && (
+				<span
+					className={classNames(styles.errorMessage, {
+						[styles.error]: errorMessage.empty,
+					})}
+				>
+					{errorMessage.message}
+				</span>
+			)}
 			{isLoading ? (
 				<p className={styles.loadingMessage}>
 					Al jouw zware lifts laden...
