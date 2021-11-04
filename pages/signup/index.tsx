@@ -151,7 +151,7 @@ const Signup: NextPage = () => {
 					name="gender"
 					onChange={(e) => setSelectedGender(e.currentTarget.value)}
 					required
-					checked
+					checked={selectedGender === "male"}
 					ref={genderRef}
 				/>
 
@@ -163,6 +163,7 @@ const Signup: NextPage = () => {
 					name="gender"
 					onChange={(e) => setSelectedGender(e.currentTarget.value)}
 					required
+					checked={selectedGender === "female"}
 					ref={genderRef}
 				/>
 
