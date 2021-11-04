@@ -26,7 +26,7 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 		if (!response.ok) {
 			throw new Error(data.message || "Something went wrong!");
 		}
-		console.log("check");
+		console.log("check.");
 		if (data.lifts?.lifts) {
 			console.log("data", data.lifts);
 			setShowUpdateModal(true);
@@ -35,8 +35,6 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 				...data.lifts.lifts,
 			});
 		}
-
-		setIsLoading(false);
 
 		return data;
 	};
@@ -59,8 +57,14 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 		setIsLoading(true);
 
 		checkForSubmittedLiftsToday()
-			.then((value) => {})
-			.catch((error) => console.log(error));
+			.then((value) => {
+				console.log("value", value);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				console.log(error);
+			});
 	}, []);
 
 	const clearForm = () => setLifts({});
