@@ -52,7 +52,7 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 		createLift(lifts)
 			.then((value) => {
 				setShowModal(false);
-				clearForm();
+				// clearForm();
 				setErrorMessage(INITIAL_ERROR_STATE);
 			})
 			.catch((error) => {
