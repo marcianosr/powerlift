@@ -59,9 +59,9 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 				</section>
 
 				<section className={styles.infoContainer}>
-					<div className={styles.rpeContainer}>
+					{/* <div className={styles.rpeContainer}>
 						<span className={styles.rpe}>RPE 9</span>
-					</div>
+					</div> */}
 					<div className={styles.info}>
 						<div className={styles.weight}>
 							<span>{user.lifts[laneTitle]?.weight}</span>
