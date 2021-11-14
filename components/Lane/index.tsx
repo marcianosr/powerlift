@@ -1,4 +1,5 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { User } from "../../types";
 import Card, { SmallCard } from "../Card";
 import styles from "./styles.module.css";

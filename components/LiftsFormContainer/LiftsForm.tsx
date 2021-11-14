@@ -6,6 +6,7 @@ import { createLift } from "./createLift";
 import FormGroup from "./FormGroup";
 import styles from "./styles.module.css";
 import { Lifts } from "../../types";
+import { useMutation, useQueryClient } from "react-query";
 
 type LiftsFormProps = {
 	setShowModal: Dispatch<SetStateAction<boolean>>;
@@ -46,29 +47,33 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 	const [errorMessage, setErrorMessage] =
 		useState<ErrorMessage>(INITIAL_ERROR_STATE);
 
+	const queryClient = useQueryClient();
+
+	const { mutate } = useMutation(createLift, {
+		onSuccess: () => {
+			setShowModal(false);
+			setErrorMessage(INITIAL_ERROR_STATE);
+			queryClient.invalidateQueries("users"); // Invalidate the data to reflect the new data in the UI.
+		},
+		onError: (error) => {
+			const invalidFields = JSON.parse(error.message)?.fields;
+			const messageType = JSON.parse(error.message)?.message;
+
+			if (invalidFields) {
+				return setErrorMessage({
+					...errorMessage,
+					message: ERROR_MESSAGES[messageType],
+					fields: invalidFields,
+				});
+			}
+
+			setErrorMessage({ ...errorMessage, empty: true });
+		},
+	});
+
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-
-		createLift(lifts)
-			.then((value) => {
-				setShowModal(false);
-				// clearForm();
-				setErrorMessage(INITIAL_ERROR_STATE);
-			})
-			.catch((error) => {
-				const invalidFields = JSON.parse(error.message)?.fields;
-				const messageType = JSON.parse(error.message)?.message;
-
-				if (invalidFields) {
-					return setErrorMessage({
-						...errorMessage,
-						message: ERROR_MESSAGES[messageType],
-						fields: invalidFields,
-					});
-				}
-
-				return setErrorMessage({ ...errorMessage, empty: true });
-			});
+		mutate(lifts);
 	};
 
 	return (
