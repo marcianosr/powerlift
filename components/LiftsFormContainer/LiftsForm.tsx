@@ -53,7 +53,7 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 		onSuccess: () => {
 			setShowModal(false);
 			setErrorMessage(INITIAL_ERROR_STATE);
-			queryClient.invalidateQueries("users"); // Invalidate the data to reflect the new data in the UI.
+			queryClient.invalidateQueries("users"); // Invalidate the data to reflect the new data in the UI. Improve with https://www.youtube.com/watch?v=XI0SN5AI6YA&list=PLC3y8-rFHvwjTELCrPrcZlo6blLBUspd2&index=23&ab_channel=Codevolution
 		},
 		onError: (error) => {
 			const invalidFields = JSON.parse(error.message)?.fields;
