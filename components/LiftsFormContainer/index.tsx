@@ -19,13 +19,14 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
 	const checkForSubmittedLiftsToday = async () => {
-		const response = await fetch("api/lift/check-lifts");
+		const response = await fetch("/api/lift/check-lifts");
 
 		const data = await response.json();
 
 		if (!response.ok) {
 			throw new Error(data.message || "Something went wrong!");
 		}
+
 		if (data.lifts?.lifts) {
 			console.log("data", data.lifts);
 			setShowUpdateModal(true);

@@ -1,7 +1,7 @@
 import { Lifts } from "../../types";
 
 export const createLift = async (lifts: Lifts) => {
-	const response = await fetch("api/lift/add-lift", {
+	const response = await fetch("/api/lift/add-lift", {
 		method: "POST",
 		body: JSON.stringify({ lifts }),
 		headers: {
