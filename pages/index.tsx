@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import type { GetServerSideProps, NextPage } from "next";
 import { getSession, useSession } from "next-auth/client";
-import LiftsFormContainer from "../components/LiftsFormContainer";
-import LaneContainer from "../components/LaneContainer";
 import { UserResponse } from "../types";
-import LaneHeader from "../components/LaneHeader";
 import { dehydrate, QueryClient, useQuery } from "react-query";
+import Wrapper from "../components/LaneContainer/Wrapper";
+import { format, parse, isValid } from "date-fns";
+import { nl } from "date-fns/locale";
 
 export type LiftsProps = {
 	users: UserResponse[];
 	cookie: string;
 };
 
-const Home: NextPage<LiftsProps> = ({ cookie, ...rest }) => {
+const Home: NextPage<LiftsProps> = ({ cookie }) => {
 	const [session, loading] = useSession();
-	const [showModal, setShowModal] = useState(false);
 	const { data, error, status, isLoading, isFetching } = useQuery(
 		"users",
 		() => getLiftsFromUsers(cookie),
@@ -29,13 +28,7 @@ const Home: NextPage<LiftsProps> = ({ cookie, ...rest }) => {
 	return (
 		<>
 			<main style={{ maxWidth: "1200px", marginTop: "5rem" }}>
-				<LaneHeader setShowModal={setShowModal} />
-				{status === "loading" && <p>Loading...</p>}
-				{status === "success" && <LaneContainer users={data} />}
-				<LiftsFormContainer
-					showModal={showModal}
-					setShowModal={setShowModal}
-				/>
+				{data && <Wrapper data={data} status={status} />}
 			</main>
 		</>
 	);
@@ -43,16 +36,30 @@ const Home: NextPage<LiftsProps> = ({ cookie, ...rest }) => {
 
 export default Home;
 
-export const getLiftsFromUsers = async (cookie: string | undefined) => {
-	const response = await fetch("api/lift/get-lifts", {
+export const getLiftsFromUsers = async (
+	cookie: string | undefined,
+	date?: string
+) => {
+	const today = new Date();
+	const formattedTodaysDate = format(today, "dd-MM-yyyy");
+
+	const response = await fetch("http://localhost:3000/api/lift/get-lifts", {
 		headers: {
 			Cookie: cookie || "",
+			"Content-Type": "application/json",
 		},
+		method: "POST",
+		body: date ? JSON.stringify(date) : JSON.stringify(formattedTodaysDate),
 	});
 
-	const userLifts = (await response.json()) as UserResponse;
+	if (!response.ok) {
+		const error = await response.json();
+	}
+	const result = (await response.json()) as UserResponse;
 
-	return userLifts.data;
+	// console.log("result", result);
+
+	return result.data;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
@@ -67,7 +74,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 			},
 		};
 	}
-
 	const queryClient = new QueryClient();
 
 	await queryClient.prefetchQuery("users", async () =>

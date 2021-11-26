@@ -1,11 +1,11 @@
-import { format } from "date-fns";
+import { format, parse, isValid } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { connect } from "../../../lib/db";
+import { nl } from "date-fns/locale";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	if (req.method !== "GET") return;
-
+	if (req.method !== "POST") return;
 	const session = await getSession({ req }); // Look into the request if session tokken cookie is part of the request
 
 	if (!session) {
@@ -21,17 +21,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const user = await usersCollection.findOne({ email });
 
 	if (!user) {
-		res.status(404).json({ message: "User not found." });
+		res.status(404).json({ message: "User not found.", error: true });
 		client.close();
 	}
 
 	const liftsCollections = await client.db().collection("lifts");
-	const today = format(new Date(), "dd/MM/yyyy");
 
+	const parsedDate = parse(req.body, "P", new Date(), { locale: nl });
+
+	const formattedIncomingDate = format(new Date(parsedDate), "dd-MM-yyyy");
 	// Get the last updated lifts.
 	const lifts = await liftsCollections
 		.find({
-			date: today,
+			date: formattedIncomingDate,
 		})
 		.toArray();
 
