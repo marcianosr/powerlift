@@ -2,11 +2,11 @@ import React, { Dispatch, SetStateAction, useState, VFC } from "react";
 import classNames from "classnames";
 import Modal from "../Modal";
 import Button from "../Button";
-import { createLift } from "./createLift";
 import FormGroup from "./FormGroup";
 import styles from "./styles.module.css";
 import { Lifts } from "../../types";
 import { useMutation, useQueryClient } from "react-query";
+import { createLift } from "../../api";
 
 type LiftsFormProps = {
 	setShowModal: Dispatch<SetStateAction<boolean>>;
