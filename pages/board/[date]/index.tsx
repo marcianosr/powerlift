@@ -4,10 +4,10 @@ import { getSession } from "next-auth/client";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { GetServerSideProps } from "next";
 import Wrapper from "../../../components/LaneContainer/Wrapper";
-import { getLiftsFromUsers } from "../..";
 import { useRouter } from "next/router";
 import { isValid, parse } from "date-fns";
 import { nl } from "date-fns/locale";
+import { getLiftsFromUsers } from "../../../api";
 
 type BoardOverviewProps = {
 	cookie: string;
