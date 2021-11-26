@@ -22,11 +22,7 @@ const Home: NextPage<LiftsProps> = ({ cookie }) => {
 		}
 	);
 
-	return (
-		<section style={{ maxWidth: "1320px", marginTop: "5rem" }}>
-			{data && <Wrapper data={data} status={status} />}
-		</section>
-	);
+	return <>{data && <Wrapper data={data} status={status} />}</>;
 };
 
 export default Home;
