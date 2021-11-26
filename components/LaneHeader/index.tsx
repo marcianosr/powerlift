@@ -5,11 +5,12 @@ import styles from "./styles.module.css";
 
 type LaneHeaderProps = {
 	setShowModal: Dispatch<SetStateAction<boolean>>;
+	date?: string;
 };
 
-const LaneHeader: FC<LaneHeaderProps> = ({ setShowModal }) => (
+const LaneHeader: FC<LaneHeaderProps> = ({ setShowModal, date }) => (
 	<section className={styles.laneHeaderContainer}>
-		<DateLine />
+		<DateLine date={date} />
 		<Button variant="primary" onClick={() => setShowModal(true)}>
 			Lifts toevoegen
 		</Button>
