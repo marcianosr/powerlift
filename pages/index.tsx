@@ -23,8 +23,6 @@ const Home: NextPage<LiftsProps> = ({ cookie }) => {
 		}
 	);
 
-	console.log({ isFetching, isLoading });
-
 	return (
 		<>
 			<main style={{ maxWidth: "1200px", marginTop: "5rem" }}>
