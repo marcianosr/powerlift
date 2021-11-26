@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const liftsCollections = await client.db().collection("lifts");
 
-	const today = format(new Date(), "dd/MM/yyyy");
+	const today = format(new Date(), "dd-MM-yyyy");
 
 	const hasResultAlready = await liftsCollections.findOne({
 		email,
