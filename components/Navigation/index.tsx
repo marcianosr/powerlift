@@ -10,17 +10,31 @@ const Navigation: React.VFC = () => {
 
 	return (
 		<nav className={styles.navigation}>
-			{session?.user ? (
-				<>
-					<Link href={`/profile/prfile`}>Profiel</Link>
-					<button onClick={onLogout}>Log out</button>
-				</>
-			) : (
-				<>
-					<Link href={`/signup`}>Sign up</Link> /{" "}
-					<Link href="/signup">Log in</Link>
-				</>
-			)}
+			<ul>
+				{session?.user ? (
+					<>
+						<li>
+							{/* <Link
+								href={`/profile/${session.user.displayName.toLowerCase()}`}
+							>
+								Profiel
+							</Link> */}
+						</li>
+						<li>
+							<button onClick={onLogout}>Log out</button>
+						</li>
+					</>
+				) : (
+					<>
+						<li>
+							<Link href={`/signup`}>Sign up</Link> / <li></li>
+						</li>
+						<li>
+							<Link href="/signup">Log in</Link>
+						</li>
+					</>
+				)}
+			</ul>
 		</nav>
 	);
 };

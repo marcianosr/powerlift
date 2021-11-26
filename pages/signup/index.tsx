@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import React, { useEffect, useRef, useState } from "react";
 import { getSession, signIn } from "next-auth/client";
 import router, { useRouter } from "next/router";
+import styles from "./styles.module.css";
 
 const createUser = async (
 	email: string,
@@ -56,7 +57,7 @@ const Login: React.FC = () => {
 
 	return (
 		<>
-			<h1>Login</h1>
+			<h1>Inloggen op LiftBoard</h1>
 			<form>
 				<label>Email</label>
 				<input type="email" id="login-email" required ref={emailRef} />
@@ -129,93 +130,113 @@ const Signup: NextPage = () => {
 	};
 
 	return (
-		<section>
+		<>
 			<Login />
-			<form>
-				<label>Email</label>
-				<input type="email" id="email" required ref={emailRef} />
+			<section>
+				<h1>Account aanmaken op LiftBoard</h1>
 
-				<label>Display name</label>
-				<input
-					type="text"
-					id="displayName"
-					required
-					ref={displayNameRef}
-				/>
+				<form className={styles.signupForm}>
+					<label>Email</label>
+					<input type="email" id="email" required ref={emailRef} />
 
-				<label htmlFor="male">Male</label>
-				<input
-					type="radio"
-					id="male"
-					value="male"
-					name="gender"
-					onChange={(e) => setSelectedGender(e.currentTarget.value)}
-					required
-					checked={selectedGender === "male"}
-					ref={genderRef}
-				/>
+					<label>Display name</label>
+					<input
+						type="text"
+						id="displayName"
+						required
+						ref={displayNameRef}
+					/>
 
-				<label htmlFor="female">Female</label>
-				<input
-					type="radio"
-					id="female"
-					value="female"
-					name="gender"
-					onChange={(e) => setSelectedGender(e.currentTarget.value)}
-					required
-					checked={selectedGender === "female"}
-					ref={genderRef}
-				/>
+					<label htmlFor="male">Male</label>
+					<input
+						type="radio"
+						id="male"
+						value="male"
+						name="gender"
+						onChange={(e) =>
+							setSelectedGender(e.currentTarget.value)
+						}
+						required
+						checked={selectedGender === "male"}
+						ref={genderRef}
+					/>
 
-				<label>Weight class</label>
-				{selectedGender === "female" && (
-					<select name="weightClass" id="weightClass" ref={weightRef}>
-						<option value="">-- Select your weight class --</option>
-						<option value="47">47kg</option>
-						<option value="52">52kg</option>
-						<option value="57">57kg</option>
-						<option value="63">63kg</option>
-						<option value="69">69kg</option>
-						<option value="76">76kg</option>
-						<option value="84">84kg</option>
-						<option value="84+">84+kg</option>
+					<label htmlFor="female">Female</label>
+					<input
+						type="radio"
+						id="female"
+						value="female"
+						name="gender"
+						onChange={(e) =>
+							setSelectedGender(e.currentTarget.value)
+						}
+						required
+						checked={selectedGender === "female"}
+						ref={genderRef}
+					/>
+
+					<label>Weight class</label>
+					{selectedGender === "female" && (
+						<select
+							name="weightClass"
+							id="weightClass"
+							ref={weightRef}
+						>
+							<option value="">
+								-- Select your weight class --
+							</option>
+							<option value="47">47kg</option>
+							<option value="52">52kg</option>
+							<option value="57">57kg</option>
+							<option value="63">63kg</option>
+							<option value="69">69kg</option>
+							<option value="76">76kg</option>
+							<option value="84">84kg</option>
+							<option value="84+">84+kg</option>
+						</select>
+					)}
+
+					{selectedGender === "male" && (
+						<select
+							name="weightClass"
+							id="weightClass"
+							ref={weightRef}
+						>
+							<option value="">
+								--Select your weight class--
+							</option>
+							<option value="59">59kg</option>
+							<option value="66">66kg</option>
+							<option value="74">74kg</option>
+							<option value="83">83kg</option>
+							<option value="93">93kg</option>
+							<option value="105">105kg</option>
+							<option value="120">120kg</option>
+							<option value="120+">120+kg</option>
+						</select>
+					)}
+
+					<select name="club" id="club" ref={clubRef}>
+						<option value="">-- Select your club --</option>
+						<option value="Sportcentrum TopFit">
+							Sportcentrum TopFit
+						</option>
+						<option value="TSKV Spartacus">TSKV Spartacus</option>
 					</select>
-				)}
+					<label>Password</label>
+					<input
+						type="password"
+						id="password"
+						required
+						ref={passwordRef}
+					/>
 
-				{selectedGender === "male" && (
-					<select name="weightClass" id="weightClass" ref={weightRef}>
-						<option value="">--Select your weight class--</option>
-						<option value="59">59kg</option>
-						<option value="66">66kg</option>
-						<option value="74">74kg</option>
-						<option value="83">83kg</option>
-						<option value="93">93kg</option>
-						<option value="105">105kg</option>
-						<option value="120">120kg</option>
-						<option value="120+">120+kg</option>
-					</select>
-				)}
-
-				<select name="club" id="club" ref={clubRef}>
-					<option value="">-- Select your club --</option>
-					<option value="Sportcentrum TopFit">
-						Sportcentrum TopFit
-					</option>
-					<option value="TSKV Spartacus">TSKV Spartacus</option>
-				</select>
-				<label>Password</label>
-				<input
-					type="password"
-					id="password"
-					required
-					ref={passwordRef}
-				/>
-
-				<button type="submit" onClick={onSignUp}>
-					Create
-				</button>
-			</form>
-		</section>
+					<button type="submit" onClick={onSignUp}>
+						Create
+					</button>
+				</form>
+			</section>
+		</>
 	);
 };
 

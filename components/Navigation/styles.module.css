@@ -2,4 +2,11 @@
 	height: 3rem;
 	border-bottom: 1px solid #d5d5d5;
 	width: 100%;
+	max-width: 700px;
+	/* Set width based on the whole content. TBD later */
+}
+
+.navigation ul {
+	display: flex;
+	justify-content: flex-end;
 }

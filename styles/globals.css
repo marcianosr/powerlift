@@ -37,3 +37,7 @@ a {
 	);
 	--cardRadius: 10px;
 }
+
+ul {
+	list-style: none;
+}
