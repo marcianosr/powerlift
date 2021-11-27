@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 type ModalProps = {
 	onClickBackdrop: () => void;
-	withCloseButton: boolean;
+	withCloseButton?: boolean;
 };
 
 const Modal: FC<ModalProps> = ({

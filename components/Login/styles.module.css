@@ -1,0 +1,115 @@
+.description {
+	font-size: 0.85rem;
+}
+
+.loginModalContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginModalContent h1 {
+	margin-top: 0;
+}
+
+.loginModalContent > * {
+	margin-bottom: 0.75rem;
+}
+
+.loginForm {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+.loginForm legend {
+	font-size: 1rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	margin-top: 3rem;
+	padding: 0;
+}
+
+.fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.fieldset:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.5rem;
+}
+
+.loginForm label {
+	font-weight: 700;
+	font-size: 0.85rem;
+}
+
+.loginForm input {
+	padding: 0.65rem;
+	border: 1px solid #9e9e9e;
+	border-radius: 5px;
+	background-color: white;
+	font-family: "Nunito";
+	font-weight: 500;
+	font-size: 1rem;
+	margin: 0;
+}
+
+.loginForm button {
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.createAccountText {
+	display: flex;
+	margin-top: 2rem;
+	margin-bottom: 0;
+}
+
+.createAccountText > span {
+	margin-right: 0.25rem;
+}
+
+.genderContainer {
+	justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+}
+
+.selectWeightClassContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;
+}
+
+.selectBox {
+	display: flex;
+	margin-top: 0.5rem;
+}
+
+.genderRadioButtonGroup {
+	display: flex;
+	align-items: center;
+}
+
+.genderRadioButtonGroup label {
+	font-size: 1.25rem;
+	margin-right: 1rem;
+}
+
+.genderRadioButtonGroup input {
+	margin-right: 0.5rem;
+}
+
+.divider {
+	border: 1px solid black;
+	margin: 1rem;
+	height: 70px;
+}

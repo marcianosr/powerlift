@@ -3,9 +3,9 @@ import classNames from "classnames";
 import styles from "./styles.module.css";
 
 type ButtonProps = {
-	variant: "primary";
+	variant: "primary" | "flat";
 	type?: "button" | "submit";
-	onClick?: () => void;
+	onClick?: (e?: React.MouseEvent) => void;
 };
 
 const Button: FC<ButtonProps> = ({

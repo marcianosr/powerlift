@@ -47,3 +47,35 @@ export const createLift = async (lifts: Lifts) => {
 
 	return data;
 };
+
+export const createUser = async (
+	email: string,
+	displayName: string,
+	gender: string,
+	weightClass: string,
+	club: string,
+	password: string
+) => {
+	const response = await fetch("api/auth/signup", {
+		method: "POST",
+		body: JSON.stringify({
+			email,
+			displayName,
+			gender,
+			weightClass,
+			club,
+			password,
+		}),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	const data = await response.json();
+
+	if (!response.ok) {
+		throw new Error(data.message || "Something went wrong!");
+	}
+
+	return data;
+};

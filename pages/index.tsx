@@ -28,17 +28,17 @@ const Home: NextPage<LiftsProps> = ({ cookie }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-	const session = await getSession({ req: req }); // look into the req, gets the session cookie en checks if it is valid
+	// const session = await getSession({ req: req }); // look into the req, gets the session cookie en checks if it is valid
 	const cookie = req.headers.cookie;
 
-	if (!session) {
-		return {
-			redirect: {
-				destination: "/signup",
-				permanent: false, // Only this time, because the user is not logged in.
-			},
-		};
-	}
+	// if (!session) {
+	// 	return {
+	// 		redirect: {
+	// 			destination: "/signup",
+	// 			permanent: false, // Only this time, because the user is not logged in.
+	// 		},
+	// 	};
+	// }
 	const queryClient = new QueryClient();
 
 	await queryClient.prefetchQuery("users", async () =>
