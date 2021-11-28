@@ -1,12 +1,6 @@
 import { useSession } from "next-auth/client";
-import React, {
-	Dispatch,
-	FC,
-	SetStateAction,
-	useEffect,
-	useState,
-} from "react";
-import LoginModal from "../Login/LoginModal";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import LoginSignUpModal from "../Login/LoginSignUpModal";
 import LiftsForm from "./LiftsForm";
 
 type LiftsFormContainerProps = {
@@ -21,7 +15,9 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 	const [session] = useSession();
 
 	if (!session && showModal) {
-		return <LoginModal setShowModal={setShowModal} />;
+		return (
+			<LoginSignUpModal setShowModal={setShowModal} modalType="login" />
+		);
 	}
 
 	const [lifts, setLifts] = useState<any>({

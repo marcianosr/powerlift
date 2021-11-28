@@ -31,6 +31,10 @@
 	padding: 0;
 }
 
+.flat:hover {
+	text-decoration: underline;
+}
+
 .disabled {
 	cursor: not-allowed;
 	color: #c3c3c3;

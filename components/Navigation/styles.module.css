@@ -14,3 +14,7 @@
 
 	/* Set width based on the whole content. TBD later */
 }
+
+.navigation li:not(:last-of-type) {
+	margin-right: 1rem;
+}

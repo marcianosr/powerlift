@@ -1,16 +1,21 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import Button from "../Button";
 import Modal from "../Modal";
+import { ModalTypeState } from "../Navigation";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import styles from "./styles.module.css";
 
-type LoginModalProps = {
+type LoginSignUpModalProps = {
 	setShowModal: Dispatch<SetStateAction<boolean>>;
+	modalType: ModalTypeState;
 };
 
-const LoginModal: FC<LoginModalProps> = ({ setShowModal }) => {
-	const [toggleContent, setToggleContent] = useState("login");
+const LoginSignUpModal: FC<LoginSignUpModalProps> = ({
+	setShowModal,
+	modalType,
+}) => {
+	const [toggleContent, setToggleContent] = useState(modalType);
 
 	return (
 		<Modal onClickBackdrop={() => setShowModal(false)}>
@@ -23,10 +28,10 @@ const LoginModal: FC<LoginModalProps> = ({ setShowModal }) => {
 	);
 };
 
-export default LoginModal;
+export default LoginSignUpModal;
 
 type ModalContentProps = {
-	setToggleContent: (state: string) => void;
+	setToggleContent: (state: "login" | "signup") => void;
 };
 
 const LoginModalContent: FC<ModalContentProps> = ({ setToggleContent }) => (

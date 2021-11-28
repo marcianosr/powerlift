@@ -17,7 +17,7 @@ const DateLine: FC<DateLineProps> = ({ date }) => (
 		) : (
 			<>
 				Vandaag {format(Date.now(), "dd/MM/yyyy")} (week{" "}
-				{getISOWeek(Date.now())}
+				{getISOWeek(Date.now())})
 			</>
 		)}
 	</h2>
