@@ -6,10 +6,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method !== "POST") return; // code below should not execute on e.g GET requests
 
 	const data = req.body;
-	const { email, displayName, gender, weightClass, club, password } = data;
+	const { email, displayName, weightClass, club, password } = data;
+	const mandatoryFields = ["email", "displayName", "weightClass", "password"];
 
-	if (!email || !displayName || !gender || !weightClass || !club || !password)
-		return res.status(422).json({ message: "Form fields empty" });
+	const invalidFields = mandatoryFields.filter((key) => !data[key] && key);
+
+	console.log("invalidFields", invalidFields);
+
+	if (invalidFields.length > 0)
+		return res.status(422).json({
+			message: "Form fields empty.",
+			fields: invalidFields,
+		});
 
 	const client = await connect();
 	const db = client.db();
@@ -25,7 +33,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const result = await db.collection("users").insertOne({
 		email,
 		displayName,
-		gender,
 		weightClass,
 		club,
 		password: await hashPassword(password),
