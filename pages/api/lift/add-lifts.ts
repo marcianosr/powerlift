@@ -80,7 +80,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	// The end
 	//////////////////////////////////
 
-	const isInvalid = validatedInputFields.includes(false);
+	const isInvalid =
+		validatedInputFields.includes(false) ||
+		validatedInputFields.every((input) => !input);
+	console.log(validatedInputFields);
 
 	console.log("isInvalid", isInvalid);
 
@@ -147,6 +150,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 		return res.status(201).json({ message: `UPDATE_SUCCES` });
 	}
+
+	return;
 
 	const result = await liftsCollections.insertOne({
 		email,
