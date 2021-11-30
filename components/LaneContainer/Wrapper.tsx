@@ -17,7 +17,14 @@ const Wrapper: FC<WrapperProps> = ({ status, data, date }) => {
 		<>
 			<LaneHeader setShowModal={setShowModal} date={date} />
 			{status === "loading" && <p>Loading...</p>}
-			{status === "success" && <LaneContainer users={data} />}
+			{data.length > 0 && status === "success" ? (
+				<LaneContainer users={data} />
+			) : (
+				<p>
+					Er zijn vandaag nog geen lifts toegevoegd! Ben jij de
+					eerste?
+				</p>
+			)}
 			<LiftsFormContainer
 				showModal={showModal}
 				setShowModal={setShowModal}
