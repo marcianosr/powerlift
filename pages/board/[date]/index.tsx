@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import format from "date-fns/format";
-import { getSession } from "next-auth/client";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { GetServerSideProps } from "next";
 import Wrapper from "../../../components/LaneContainer/Wrapper";
@@ -8,6 +7,7 @@ import { useRouter } from "next/router";
 import { isValid, parse } from "date-fns";
 import { nl } from "date-fns/locale";
 import { getLiftsFromUsers } from "../../../api";
+import { useSession } from "next-auth/client";
 
 type BoardOverviewProps = {
 	cookie: string;
@@ -16,6 +16,13 @@ type BoardOverviewProps = {
 
 const BoardOverview: FC<BoardOverviewProps> = ({ cookie, date }) => {
 	const { isReady } = useRouter();
+	const [session] = useSession();
+
+	if (!session) {
+		return (
+			<p>Om de lifts per dag te kijken moet je een account aanmaken!</p>
+		);
+	}
 
 	const { data, error, status, isLoading, isFetching } = useQuery(
 		"users",
@@ -37,18 +44,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 	req,
 	query,
 }) => {
-	const session = await getSession({ req: req }); // look into the req, gets the session cookie en checks if it is valid
 	const cookie = req.headers.cookie;
 	const date = query.date as string;
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: "/signup",
-				permanent: false, // Only this time, because the user is not logged in.
-			},
-		};
-	}
 
 	const parsedDate = date && parse(date, "P", new Date(), { locale: nl });
 	const today = new Date();
