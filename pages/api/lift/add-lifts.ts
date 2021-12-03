@@ -151,8 +151,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(201).json({ message: `UPDATE_SUCCES` });
 	}
 
-	return;
-
 	const result = await liftsCollections.insertOne({
 		email,
 		displayName,

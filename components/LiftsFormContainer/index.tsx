@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useSession } from "next-auth/client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import LoginSignUpModal from "../Login/LoginSignUpModal";
@@ -6,11 +7,13 @@ import LiftsForm from "./LiftsForm";
 type LiftsFormContainerProps = {
 	showModal: boolean;
 	setShowModal: Dispatch<SetStateAction<boolean>>;
+	date?: string;
 };
 
 const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 	showModal,
 	setShowModal,
+	date,
 }) => {
 	const [session] = useSession();
 
@@ -29,7 +32,13 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
 	const checkForSubmittedLiftsToday = async () => {
-		const response = await fetch("/api/lift/check-lifts");
+		const today = new Date();
+		const formattedTodaysDate = format(today, "dd-MM-yyyy");
+
+		const response = await fetch("/api/lift/check-lifts", {
+			method: "POST",
+			body: date ? date : formattedTodaysDate, // somehow I don't need stringify here because it's applying quotes on the string?
+		});
 
 		const data = await response.json();
 
@@ -65,7 +74,6 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 
 	useEffect(() => {
 		setIsLoading(true);
-
 		checkForSubmittedLiftsToday()
 			.then((value) => {
 				setIsLoading(false);

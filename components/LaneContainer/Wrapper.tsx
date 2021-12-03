@@ -28,6 +28,7 @@ const Wrapper: FC<WrapperProps> = ({ status, data, date }) => {
 			<LiftsFormContainer
 				showModal={showModal}
 				setShowModal={setShowModal}
+				date={date}
 			/>
 		</>
 	);

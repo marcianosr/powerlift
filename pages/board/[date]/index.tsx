@@ -18,12 +18,6 @@ const BoardOverview: FC<BoardOverviewProps> = ({ cookie, date }) => {
 	const { isReady } = useRouter();
 	const [session] = useSession();
 
-	if (!session) {
-		return (
-			<p>Om de lifts per dag te kijken moet je een account aanmaken!</p>
-		);
-	}
-
 	const { data, error, status, isLoading, isFetching } = useQuery(
 		"users",
 		() => getLiftsFromUsers(cookie, date),
@@ -35,7 +29,19 @@ const BoardOverview: FC<BoardOverviewProps> = ({ cookie, date }) => {
 		}
 	);
 
-	return <>{data && <Wrapper status={status} data={data} date={date} />}</>;
+	// The order of this and the query above goes against the react hooks rules @ TODO
+	if (!session) {
+		return (
+			<p>Om de lifts per dag te kijken moet je een account aanmaken!</p>
+		);
+	}
+
+	return (
+		<>
+			{isLoading && <p>Haalt zware lifts op...</p>}
+			{data && <Wrapper status={status} data={data} date={date} />}
+		</>
+	);
 };
 
 export default BoardOverview;
@@ -45,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 	query,
 }) => {
 	const cookie = req.headers.cookie;
-	const date = query.date as string;
+	const date = query.date as string; // the source of evil
 
 	const parsedDate = date && parse(date, "P", new Date(), { locale: nl });
 	const today = new Date();
