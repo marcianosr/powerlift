@@ -42,7 +42,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	sortedLifts.sort((a, b) => {
 		const dateA = new Date(a.dateTime);
 		const dateB = new Date(b.dateTime);
-		return dateA > dateB ? 1 : -1;
+
+		return dateA < dateB ? 1 : -1;
 	});
 
 	client.close();
