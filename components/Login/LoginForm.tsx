@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
@@ -8,6 +8,7 @@ const LoginForm: FC = () => {
 	const emailRef = useRef<HTMLInputElement | null>(null);
 	const passwordRef = useRef<HTMLInputElement | null>(null);
 	const router = useRouter();
+	const [error, setError] = useState({ message: "" });
 
 	const onLogin = async (e?: React.MouseEvent) => {
 		e?.preventDefault();
@@ -18,6 +19,15 @@ const LoginForm: FC = () => {
 			redirect: false,
 		}); // Promise will always resolve, never rejected.
 
+		console.log("res", result);
+
+		if (result?.error) {
+			setError({
+				message:
+					"Je inloggegevens kloppen niet helemaal. Wil je ze controleren?",
+			});
+		}
+
 		if (!result?.error) {
 			router.replace("/");
 		}
@@ -27,6 +37,9 @@ const LoginForm: FC = () => {
 		<form className={styles.loginForm}>
 			<fieldset className={styles.fieldset}>
 				<div className={styles.inputContainer}>
+					{error.message && (
+						<p className={styles.error}>{error.message}</p>
+					)}
 					<label htmlFor="login-email">Email</label>
 					<input
 						type="email"

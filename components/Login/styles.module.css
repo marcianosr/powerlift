@@ -118,5 +118,7 @@
 	height: 70px;
 }
 
-.errorMessageContainer {
+.error {
+	color: red;
+	font-weight: 600;
 }
