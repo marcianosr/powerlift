@@ -28,6 +28,6 @@
 
 .wrapper {
 	display: grid;
-	grid-template-columns: 150px 1fr;
-	gap: 1.2rem;
+	grid-template-columns: 200px 1fr;
+	gap: 1rem;
 }
