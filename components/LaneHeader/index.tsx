@@ -12,7 +12,7 @@ const LaneHeader: FC<LaneHeaderProps> = ({ setShowModal, date }) => (
 	<section className={styles.laneHeaderContainer}>
 		<DateLine date={date} />
 		<Button variant="primary" onClick={() => setShowModal(true)}>
-			Lifts toevoegen
+			Voeg jouw lifts toe
 		</Button>
 	</section>
 );

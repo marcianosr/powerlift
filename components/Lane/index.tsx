@@ -13,10 +13,16 @@ const Lane: React.VFC<LaneProps> = ({ title, users }) => {
 
 	return (
 		<section className={styles.lane}>
-			<h1>{laneTitle}</h1>
+			<section className={styles.titleContainer}>
+				<h1>{title}</h1>
+				<span className={styles.description}>
+					Wat is je hoogste <strong>{title.toLowerCase()}</strong>{" "}
+					voor vandaag?
+				</span>
+			</section>
 
 			{users.map((user) => {
-				if (laneTitle === "totaal")
+				if (laneTitle === "lifttotaal")
 					return <SmallCard key={user._id} user={user} />;
 
 				return (

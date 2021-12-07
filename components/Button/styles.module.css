@@ -44,3 +44,17 @@
 .disabled:hover {
 	background-color: transparent;
 }
+
+.flatBig {
+	color: black;
+	font-size: 1rem;
+	padding: 0;
+}
+
+.flatBig:hover {
+	text-decoration: underline;
+}
+
+.active {
+	color: #fe2c55;
+}

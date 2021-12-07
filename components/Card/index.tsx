@@ -59,30 +59,35 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 				</section>
 
 				<section className={styles.infoContainer}>
-					{/* <div className={styles.rpeContainer}>
-						<span className={styles.rpe}>RPE 9</span>
-					</div> */}
-					<div className={styles.info}>
-						<div className={styles.weight}>
-							<span>{user.lifts[laneTitle]?.weight}</span>
-							<span>kg</span>
-						</div>
+					<div className={styles.variationContainer}>
+						<p className={styles.variationTitle}>paused</p>
 					</div>
-
-					<div className={styles.info}>
-						<div className={styles.details}>
-							<span className={styles.title}>
-								{user.lifts[laneTitle]?.sets}
-							</span>
-							<span className={styles.kg}>set</span>
+					<section className={styles.infoWrapper}>
+						<div className={styles.info}>
+							<div className={styles.weight}>
+								<span>{user.lifts[laneTitle]?.weight}</span>
+								<span>kg</span>
+							</div>
 						</div>
 
-						<div className={styles.details}>
-							<span className={styles.title}>
-								{user.lifts[laneTitle]?.reps}
-							</span>
-							<span className={styles.kg}>reps</span>
+						<div className={styles.info}>
+							<div className={styles.details}>
+								<span className={styles.title}>
+									{user.lifts[laneTitle]?.sets}
+								</span>
+								<span className={styles.kg}>set</span>
+							</div>
+
+							<div className={styles.details}>
+								<span className={styles.title}>
+									{user.lifts[laneTitle]?.reps}
+								</span>
+								<span className={styles.kg}>reps</span>
+							</div>
 						</div>
+					</section>
+					<div className={styles.rpeContainer}>
+						<span className={styles.rpe}>RPE 9</span>
 					</div>
 				</section>
 				{/* <time>{formatDistance(new Date(845), Date.now())}</time> */}

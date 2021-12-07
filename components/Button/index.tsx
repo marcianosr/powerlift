@@ -3,10 +3,11 @@ import classNames from "classnames";
 import styles from "./styles.module.css";
 
 type ButtonProps = {
-	variant: "primary" | "flat";
+	variant: "primary" | "flat" | "flatBig";
 	type?: "button" | "submit";
 	onClick?: (e?: React.MouseEvent) => void;
 	disabled?: boolean;
+	isActive?: boolean;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -14,6 +15,7 @@ const Button: FC<ButtonProps> = ({
 	type = "button",
 	onClick,
 	disabled,
+	isActive,
 	children,
 }) => {
 	return (
@@ -21,6 +23,7 @@ const Button: FC<ButtonProps> = ({
 			type={type}
 			className={classNames(styles.button, styles[variant], {
 				[styles.disabled]: disabled,
+				[styles.active]: isActive,
 			})}
 			onClick={onClick}
 			disabled={disabled}

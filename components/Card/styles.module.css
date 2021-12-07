@@ -3,9 +3,9 @@
 	grid-template-rows: 1fr;
 	background: var(--primaryWhite);
 	padding: 0.6rem;
-	padding-bottom: 0.3rem;
 	border-radius: var(--cardRadius);
-	box-shadow: 0px 28px 20px -31px #9b9b9b;
+	/* box-shadow: 0px 28px 20px -31px #9b9b9b; */
+	/* border: 1px solid #dfdfdf; */
 }
 
 .noResult {
@@ -15,19 +15,12 @@
 	background-color: transparent;
 }
 
-.card p {
-	margin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .userContainer {
 	display: flex;
 	flex-direction: column;
 	/* gap: 0.25rem; */
 	justify-content: center;
-	border-bottom: 1px dashed #5c5258;
+	border-bottom: 1px solid #e3dfe9;
 	padding-bottom: 0.4rem;
 	line-height: 1;
 }
@@ -42,31 +35,67 @@
 }
 
 .userInnerContainer span {
-	font-size: 0.7rem;
-	font-weight: 600;
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+.variationContainer {
+	display: flex;
+	flex-direction: column;
+	padding: 0.25rem;
+	/* background: #9999ff40; */
+	border-radius: 0.3rem;
+	line-height: 1.1;
+}
+
+.variationContainer p {
+	margin: 0;
+	font-size: 0.75rem;
+}
+
+.variationTitle {
+	margin-top: 0;
+	font-size: 0.85rem;
+	font-weight: 700;
+	/* background-color: rgb(255 234 196 / 40%);
+	color: orange; */
+	/* color: #9999ff; */
+	color: black;
+	border-radius: 0.25rem;
 }
 
 .infoContainer {
 	display: flex;
-	gap: 0.75rem;
+	justify-content: space-between;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.infoWrapper {
+	display: flex;
+	gap: 0.5rem;
+	border-left: 1px solid #e3dfe9;
+	padding-left: 0.5rem;
 }
 
 .rpeContainer {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding-top: 0.25rem;
+	border-left: 1px solid #e3dfe9;
+	padding-left: 0.5rem;
 }
 
 .rpe {
 	/* color: red; */
 	font-weight: 700;
 	font-size: 0.75rem;
-	background-color: #ffcece;
+	background-color: #ffaaaa40;
 	display: flex;
 	align-items: center;
-	border-radius: 7px;
-	padding: 0.35rem;
+	border-radius: 0.25rem;
+	padding: 0.2rem;
+	color: #c93838;
 }
 
 .card time {
@@ -79,15 +108,21 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 0.15rem;
+	gap: 0.25rem;
 	/* background-color: #ececec; */
-	padding: 0.25rem 0;
+	/* padding: 0.25rem 0; */
 	padding-bottom: 0;
 }
 
 .info:first-child span:first-child {
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 	font-weight: 700;
+	letter-spacing: -0.5px;
+	margin-right: 0.05rem;
+}
+
+.info:first-child span:last-child {
+	font-size: 0.85rem;
 }
 
 .info:last-child {
@@ -98,7 +133,7 @@
 }
 
 .info span:nth-child(odd) {
-	font-size: 1rem;
+	font-size: 0.85rem;
 	font-weight: 700;
 }
 
@@ -143,7 +178,7 @@
 }
 
 .details span:last-child {
-	margin-top: -0.5rem;
+	margin-top: -0.25rem;
 	color: #000000ad;
-	font-size: 0.75rem;
+	font-size: 0.65rem;
 }
