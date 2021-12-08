@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { formatDistance } from "date-fns";
 import React, { FC } from "react";
 import { User } from "../../types";
+import Label from "../Label";
 import styles from "./styles.module.css";
 
 type CardProps = {
@@ -86,9 +87,7 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 							</div>
 						</div>
 					</section>
-					<div className={styles.rpeContainer}>
-						<span className={styles.rpe}>RPE 9</span>
-					</div>
+					<Label value="RPE 9" />
 				</section>
 				{/* <time>{formatDistance(new Date(845), Date.now())}</time> */}
 			</div>
