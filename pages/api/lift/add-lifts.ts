@@ -39,12 +39,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const data = req.body;
 	const { lifts } = data;
+
 	const formattedToday = format(new Date(), "dd-MM-yyyy");
 	const time = format(new Date(), "HH:mm:ss");
 	const dateTime = new Date();
 
 	const excersiseKeys = Object.keys(lifts);
-	const requiredFields = ["weight", "sets", "reps"];
+	const requiredFields = ["weight", "sets", "reps", "RPE"];
 
 	const VALIDATION_RULES: ValidationRules = {
 		squat: { min: 20, max: Math.ceil(+weightClass * 3.5) },
@@ -56,6 +57,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	// Simplify these two monstrosities later
 	const mappedInputFieldsToBoolean = excersiseKeys.map((excersise) =>
 		requiredFields.map((field) => {
+			console.log("lifs", lifts);
 			if (lifts[excersise][field] !== null) {
 				return true;
 			}

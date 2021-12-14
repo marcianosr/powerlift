@@ -87,7 +87,7 @@ const Card: FC<CardProps> = ({ user, laneTitle }) => {
 							</div>
 						</div>
 					</section>
-					<Label value="RPE 9" />
+					<Label value="RPE 9" variant="rounded" />
 				</section>
 				{/* <time>{formatDistance(new Date(845), Date.now())}</time> */}
 			</div>

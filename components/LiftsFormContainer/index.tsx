@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { useSession } from "next-auth/client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Lifts } from "../../types";
 import LoginSignUpModal from "../Login/LoginSignUpModal";
 import LiftsForm from "./LiftsForm";
 
@@ -23,11 +24,14 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 		);
 	}
 
-	const [lifts, setLifts] = useState<any>({
-		squat: { weight: null, sets: null, reps: null },
-		benchpress: { weight: null, sets: null, reps: null },
-		deadlift: { weight: null, sets: null, reps: null },
+	const [lifts, setLifts] = useState<Lifts>({
+		squat: { weight: null, sets: null, reps: null, RPE: null },
+		benchpress: { weight: null, sets: null, reps: null, RPE: null },
+		deadlift: { weight: null, sets: null, reps: null, RPE: null },
 	});
+
+	console.log("lifts", lifts);
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -90,6 +94,7 @@ const LiftsFormContainer: React.VFC<LiftsFormContainerProps> = ({
 		<LiftsForm
 			setShowModal={setShowModal}
 			lifts={lifts}
+			setLifts={setLifts}
 			isLoading={isLoading}
 			showUpdateModal={showUpdateModal}
 			clearForm={clearForm}

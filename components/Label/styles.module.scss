@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.value {
+	font-weight: 700;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 30px;
+}
+
+.small {
+	.value {
+		font-size: 0.85rem;
+		padding: 0.25rem;
+	}
+}
+
+.rounded {
+	.value {
+		border-radius: 0.25rem;
+	}
+}
+
+.large {
+	.value {
+		font-size: 1rem;
+		padding: 0.5rem;
+	}
+}

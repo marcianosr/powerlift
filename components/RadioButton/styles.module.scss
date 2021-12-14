@@ -1,0 +1,83 @@
+.radioButton {
+	opacity: 0;
+	position: fixed;
+	width: 0;
+}
+
+.radioButton:checked + .label {
+	border: 1px solid currentColor;
+	transition: 100ms transform;
+	transform: scale(1.15);
+}
+
+.radioButton:hover + .label {
+	border: 1px solid currentColor;
+}
+
+.radioButton:focus + .label {
+	border: 1px solid currentColor;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.label {
+	font-weight: 700;
+	font-size: 0.85rem;
+	background-color: #ffaaaa40;
+	display: flex;
+	justify-content: center;
+	border-radius: 0.25rem;
+	padding: 0.2rem;
+	cursor: pointer;
+	min-width: 25px;
+	border: 1px solid transparent;
+}
+
+.green {
+	background-color: #84ff5c40;
+	color: #57c938;
+}
+
+.olive {
+	background-color: #d0ff5c60;
+	color: #90c938;
+}
+
+.yellow {
+	background-color: #fffc4860;
+	color: #c9b838;
+}
+
+.darkyellow {
+	background-color: #ffda4860;
+	color: #c9a738;
+}
+
+.orange {
+	background-color: #ffb66860;
+	color: #c97738;
+}
+
+.darkorange {
+	background-color: #ff9d6860;
+	color: #c96438;
+}
+
+.red {
+	background-color: #ff1d1d30;
+	color: #d35151;
+}
+
+.darkred {
+	background-color: #ffaad260;
+	color: #ba2cc7;
+}
+
+.purple {
+	background-color: #d7aaff60;
+	color: #7038c9;
+}

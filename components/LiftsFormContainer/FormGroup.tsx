@@ -3,21 +3,28 @@ import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./styles.module.css";
 import classNames from "classnames";
+import RPEContainer from "../RPEContainer";
+import { Lifts } from "../../types";
 
 type FormGroupProps = {
 	name: string;
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 	values: {
-		weight?: string;
-		sets?: string;
-		reps?: string;
+		weight: string | null;
+		sets: string | null;
+		reps: string | null;
+		RPE: string | null;
 	};
+	lifts: Lifts;
+	setLifts: (lifts: Lifts) => void;
 	hasError: boolean;
 };
 const FormGroup: React.VFC<FormGroupProps> = ({
 	name,
 	onChange,
 	values,
+	lifts,
+	setLifts,
 	hasError,
 }) => {
 	const formName = name.toLowerCase().split(" ").join("");
@@ -40,9 +47,7 @@ const FormGroup: React.VFC<FormGroupProps> = ({
 						onChange={onChange}
 						placeholder="200"
 					/>
-					<FontAwesomeIcon icon={faWeightHanging} />
 				</div>
-
 				<div className={styles.inputAndLabel}>
 					<label htmlFor={`${formName}-sets`}>sets</label>
 					<input
@@ -54,7 +59,6 @@ const FormGroup: React.VFC<FormGroupProps> = ({
 						placeholder="5"
 					/>
 				</div>
-
 				<div className={styles.inputAndLabel}>
 					<label htmlFor={`${formName}-reps`}>reps</label>
 					<input
@@ -67,6 +71,12 @@ const FormGroup: React.VFC<FormGroupProps> = ({
 					/>
 				</div>
 			</section>
+			<RPEContainer
+				excersiseName={name}
+				lifts={lifts}
+				setLifts={setLifts}
+			/>
+
 			{/* <p>{invalid && `${formName} is niet helemaal ingevuld`}</p> */}
 		</fieldset>
 	);

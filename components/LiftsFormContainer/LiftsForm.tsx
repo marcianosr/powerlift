@@ -11,6 +11,7 @@ import { createLift } from "../../api";
 type LiftsFormProps = {
 	setShowModal: Dispatch<SetStateAction<boolean>>;
 	lifts: Lifts;
+	setLifts: (lifts: Lifts) => void;
 	isLoading: boolean;
 	showUpdateModal: boolean;
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -41,6 +42,7 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 	isLoading,
 	showUpdateModal,
 	lifts,
+	setLifts,
 	onChange,
 	clearForm,
 }) => {
@@ -111,20 +113,26 @@ const LiftsForm: VFC<LiftsFormProps> = ({
 					<FormGroup
 						name="Squat"
 						onChange={onChange}
+						lifts={lifts}
 						values={{ ...lifts.squat }}
+						setLifts={setLifts}
 						hasError={errorMessage.fields.includes("squat")}
 					/>
 
 					<FormGroup
 						name="Bench press"
 						onChange={onChange}
+						lifts={lifts}
 						values={{ ...lifts.benchpress }}
+						setLifts={setLifts}
 						hasError={errorMessage.fields.includes("benchpress")}
 					/>
 					<FormGroup
 						name="Deadlift"
 						onChange={onChange}
+						lifts={lifts}
 						values={{ ...lifts.deadlift }}
+						setLifts={setLifts}
 						hasError={errorMessage.fields.includes("deadlift")}
 					/>
 					<Button type="submit" variant="primary">
